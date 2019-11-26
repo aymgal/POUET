@@ -39,7 +39,10 @@ class Clouds():
         :param debugmode: whether or not POUET is in debugmode. If true, it ought to return some static and dummy data
         """
         self.location = name
-        self.station = (util.load_station(name)).AllSky()
+        try:
+        	self.station = (util.load_station(name)).AllSky()
+        except AttributeError:
+        	self.station = None
         self.last_im_refresh = None
         self.debugmode = debugmode
         self.failed_connection = False
@@ -58,6 +61,9 @@ class Clouds():
         Downloads the current all sky from the server and saves it to disk.
         The url of the image is retrived from the corresponding configuration file.
         """
+        if self.station is None:
+        	self.failed_connection = True
+        	return 1
         if not self.debugmode:
             try:
                 logger.info("Loading all sky from {}...".format(self.station.params['url']))
