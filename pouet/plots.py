@@ -242,6 +242,7 @@ def shownightobs(observable, meteo, obs_night=None, savefig=False, dirpath=None,
 		path = os.path.join(dirpath, obs_night, observable.name+'.png')
 		plt.savefig(path)
 		print(("Plot saved on %s" % path))
+		plt.close()
 	else:
 		plt.show()
 	logger.info("Night observability plot for {} done".format(observable.name))
