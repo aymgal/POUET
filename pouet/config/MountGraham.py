@@ -12,14 +12,14 @@ logger = logging.getLogger(__name__)
 
 class WeatherReport():
     """
-    This class is dedicated to recovering the weather report at the La Silla site and feeding the
+    This class is dedicated to recovering the weather report at the Mount Graham site and feeding the
     wind direction, wind speed, temperature and humidity back to pouet.
     It must contain at least a `get` method that returns the above variable.
     """
     
     def __init__(self, name='MountGraham'):
         """
-        Class constructor. Loads the LaSilla.cfg configuration file and saves it as attribute.
+        Class constructor. Loads the MountGraham.cfg configuration file and saves it as attribute.
         
         :param name: name of the cfg file, only included for completeness.
         """
@@ -78,14 +78,14 @@ class WeatherReport():
                 Temps.append(float(line[20:25])) # AVG
     
         # Remove out-of-band readings
-        # WD is chosen between station 1 or 2 in EDP pour la Silla.
+        # WD is chosen between station 1 or 2 in EDP pour la Silla.  # TODO : update for MountGraham
         # We take average
         Temps = np.asarray(Temps, dtype=np.float)
         Temps = Temps[Temps < 100]
         Temps = np.mean(Temps)
     
         # Remove out-of-band readings
-        # WD is chosen between station 1 or 2 in EDP pour la Silla.
+        # WD is chosen between station 1 or 2 in EDP pour la Silla.  # TODO : update for MountGraham
         # We take average
         WD = np.asarray(WD, dtype=np.float)
         WD = WD[WD < 360]
@@ -98,7 +98,7 @@ class WeatherReport():
         if WS[2] < 99:
             WS = WS[2]
         else:
-            logger.warning("Wind speed from 3.6m unavailable, using other readings in LaSilla")
+            logger.warning("Wind speed from 3.6m unavailable, using other readings in LaSilla") # TODO : update for MountGraham
             WS = np.asarray(WS, dtype=np.float)
             WS = WS[WS > 0]
             WS = WS[WS < 99]
