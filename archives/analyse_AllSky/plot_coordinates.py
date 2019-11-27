@@ -1,7 +1,6 @@
 import numpy as np
 import pylab as plt
 import glob
-import scipy.ndimage
 import util
 import imageio
 

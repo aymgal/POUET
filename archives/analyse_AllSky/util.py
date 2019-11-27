@@ -8,7 +8,6 @@ import gzip
 import copy
 import imageio
 
-import scipy.ndimage
 import numpy as np
 
 import urllib2, re
